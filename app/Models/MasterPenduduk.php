@@ -34,7 +34,7 @@ class MasterPenduduk extends Model
 
     public function balita()
     {
-        return $this->hasMany(Masterbalita::class, 'id_ortu');
+        return $this->hasMany(MasterBalita::class, 'id_ortu');
     }
 
     public function asuh()
