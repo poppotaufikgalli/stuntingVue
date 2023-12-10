@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+.number {
+  animation: animate 2.3s forwards var(--timing, linear);
+  counter-reset: num var(--n);
+}
+.number::before {
+  content: counter(num);
+}
+
+@property --percent {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: false;
+}
+@property --temp {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: false;
+}
+@property --v1 {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+@property --v2 {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+.number-d {
+  transition: --percent 2.3s;
+  --temp: calc(var(--percent) * 100);
+  --v1: max(var(--temp) - 0.5, 0);
+  --v2: max((var(--temp) - var(--v1)) * 100 - 0.5, 0);
+  counter-reset: v1 var(--v1) v2 var(--v2);
+}
+.number-d::before {
+  content: counter(v1) "." counter(v2, decimal-leading-zero) "%";
+}
+
+@keyframes animate {
+  from {
+    --n: var(0);
+  }
+  to {
+    --n: var(--to);
+  }
+}
